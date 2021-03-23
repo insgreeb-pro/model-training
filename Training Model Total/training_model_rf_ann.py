@@ -1328,6 +1328,9 @@ class Ui_MainWindow(object):
         self.fileName.setText(fileName)
         # Buka dataset!
         df = pd.read_csv(fileName)
+
+        #Preprocessing dulu biar df nanti dipake udah jadi angka semua
+
         
     
     def exit_app(self):
@@ -1688,14 +1691,14 @@ def training_sensasi_ann(parameter):
     y_sensasi=np.ravel(y_sensasi.values)
     # memisahkan 80% data latih, 20% data pengujian
     X_latih_sensasi, X_uji_sensasi, y_latih_sensasi, y_uji_sensasi = train_test_split(X_sensasi, y_sensasi, test_size=0.2)
-    print(type(X_uji_sensasi))
+    #print(type(X_uji_sensasi))
     scaler_sensasi = StandardScaler()  # doctest: +SKIP
     # Don't cheat - fit only on training data
     scaler_sensasi.fit(X_latih_sensasi)  # doctest: +SKIP
     X_latih_sensasi = scaler_sensasi.transform(X_latih_sensasi)  # doctest: +SKIP
     # apply same transformation to test data
     X_uji_sensasi = scaler_sensasi.transform(X_uji_sensasi)  # doctest: +SKIP
-    print(X_uji_sensasi)
+    #print(X_uji_sensasi)
     #Unpack parameter
     hidden_layer_size=parameter[0]
     max_iter=parameter[1]
