@@ -46,7 +46,7 @@ no_hari = [int(parser.parse(k).strftime("%w")) for k in datetime]
 data["konstanta_termal"] = [LAKI_LAKI[no_hari[idx]] if kel==1 else PEREMPUAN_BERJILBAB[no_hari[idx]] if data["jilbab"][idx]=='ya' else PEREMPUAN_TANPAJILBAB[no_hari[idx]] for idx,kel in enumerate(data["kelamin"])]
 
 print(data["konstanta_termal"])
-print(data)
+
 #daerah
 
 
