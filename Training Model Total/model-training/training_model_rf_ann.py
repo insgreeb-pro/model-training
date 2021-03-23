@@ -28,6 +28,7 @@ import sip
 import pandas as pd
 import numpy as np
 import pickle
+import preprocess_training
 
 #Initial declaration
 ml_sensasi='Random Forest'
@@ -1327,9 +1328,11 @@ class Ui_MainWindow(object):
         
         self.fileName.setText(fileName)
         # Buka dataset!
-        df = pd.read_csv(fileName)
+        df = pd.read_excel(fileName)
 
         #Preprocessing dulu biar df nanti dipake udah jadi angka semua
+        df=preprocess_training.filterNone(df)
+        df=preprocess_training.filterPreProcess(df)
 
         
     
@@ -1510,11 +1513,11 @@ def training_sensasi_rf(parameter):
     #URUTAN SENSOR OUTDOORNYA field5, field4, field6, field1, field2 
     #windspeed, wind direction, solarpower, humidity, temperature
     
-    X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','jilbab','ac','durasi_ac',
-                'durasi_kipas','asal','lama_dijogja','in_rh','in_co2','in_ta',
-                  'in_tg','in_ws','in_li','out_data5','out_data4','out_data6',
-                  'out_data1','out_data2']]
-    y_sensasi = df.loc[:,['sensasi']]
+    X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','konstanta_termal','ac','durasi_ac',
+                'durasi_kipas','asal','lama_dijogja','indoor_field1','indoor_field2','indoor_field3',
+                  'indoor_field4','indoor_field5','indoor_field6','outdoor_field1','outdoor_field2','outdoor_field3',
+                  'outdoor_field4','outdoor_field5']]
+    y_sensasi = df.loc[:,['1']]
     
     y_sensasi=np.ravel(y_sensasi.values)
     # memisahkan 80% data latih, 20% data pengujian
@@ -1556,8 +1559,8 @@ def training_kenyamanan_rf(parameter):
     global df
     #MODEL KEPUASAN/KENYAMANAN TERMAL
     # memisahkan data input dan data output
-    X_kenyamanan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','sensasi']]
-    y_kenyamanan = df.loc[:,['kepuasan',]]
+    X_kenyamanan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','1']]
+    y_kenyamanan = df.loc[:,['3',]]
     
     y_kenyamanan=np.ravel(y_kenyamanan.values)
     # memisahkan 80% data latih, 20% data pengujian
@@ -1587,8 +1590,8 @@ def training_kenyamanan_rf(parameter):
 
 def training_penerimaan_rf(parameter):
     global df
-    X_penerimaan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','sensasi','kepuasan']]
-    y_penerimaan = df.loc[:,['penerimaan']]
+    X_penerimaan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','1','3']]
+    y_penerimaan = df.loc[:,['4']]
     
     y_penerimaan=np.ravel(y_penerimaan.values)
     # memisahkan 80% data latih, 20% data pengujian
@@ -1682,11 +1685,11 @@ def training_sensasi_ann(parameter):
     #URUTAN SENSOR OUTDOORNYA field5, field4, field6, field1, field2 
     #windspeed, wind direction, solarpower, humidity, temperature
     
-    X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','jilbab','ac','durasi_ac',
-                'durasi_kipas','asal','lama_dijogja','in_rh','in_co2','in_ta',
-                  'in_tg','in_ws','in_li','out_data5','out_data4','out_data6',
-                  'out_data1','out_data2']]
-    y_sensasi = df.loc[:,['sensasi']]
+    X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','konstanta_termal','ac','durasi_ac',
+                'durasi_kipas','asal','lama_dijogja','indoor_field1','indoor_field2','indoor_field3',
+                  'indoor_field4','indoor_field5','indoor_field6','outdoor_field1','outdoor_field2','outdoor_field3',
+                  'outdoor_field4','outdoor_field5']]
+    y_sensasi = df.loc[:,['1']]
     
     y_sensasi=np.ravel(y_sensasi.values)
     # memisahkan 80% data latih, 20% data pengujian
@@ -1725,8 +1728,8 @@ def training_kenyamanan_ann(parameter):
     global scaler_kenyamanan
     #MODEL KEPUASAN/KENYAMANAN TERMAL
     # memisahkan data input dan data output
-    X_kenyamanan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','sensasi']]
-    y_kenyamanan = df.loc[:,['kepuasan',]]
+    X_kenyamanan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','1']]
+    y_kenyamanan = df.loc[:,['3',]]
     
     y_kenyamanan=np.ravel(y_kenyamanan.values)
     # memisahkan 80% data latih, 20% data pengujian
@@ -1763,8 +1766,8 @@ def training_penerimaan_ann(parameter):
     global df
     global scaler_penerimaan
 
-    X_penerimaan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','sensasi','kepuasan']]
-    y_penerimaan = df.loc[:,['penerimaan']]
+    X_penerimaan = df.loc[:,['ac','durasi_ac','durasi_kipas','asal','lama_dijogja','1','3']]
+    y_penerimaan = df.loc[:,['4']]
     
     y_penerimaan=np.ravel(y_penerimaan.values)
     # memisahkan 80% data latih, 20% data pengujian
