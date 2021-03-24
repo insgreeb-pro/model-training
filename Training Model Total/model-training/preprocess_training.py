@@ -52,8 +52,8 @@ def filterPreProcess(data):
 data_asal = json.loads("".join(open('assets/daerah.json').readlines()))
 #path="assets/R33 - Wed Feb 19 2020 00_00_00 GMT+0700 (Western Indonesia Time) - Fri Feb 28 2020 23_30_00 GMT+0700 (Western Indonesia Time).xlsx"
 
-data=readdata(path)
-data=filterNone(data)
-data=filterPreProcess(data)
+# data=readdata(path)
+# data=filterNone(data)
+# data=filterPreProcess(data)
 
-print(data)
+#print(data)

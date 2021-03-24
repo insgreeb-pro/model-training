@@ -1333,6 +1333,8 @@ class Ui_MainWindow(object):
         #Preprocessing dulu biar df nanti dipake udah jadi angka semua
         df=preprocess_training.filterNone(df)
         df=preprocess_training.filterPreProcess(df)
+        print(df)
+        print(list(df))
 
         
     
@@ -1516,7 +1518,7 @@ def training_sensasi_rf(parameter):
     X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','konstanta_termal','ac','durasi_ac',
                 'durasi_kipas','asal','lama_dijogja','indoor_field1','indoor_field2','indoor_field3',
                   'indoor_field4','indoor_field5','indoor_field6','outdoor_field1','outdoor_field2','outdoor_field3',
-                  'outdoor_field4','outdoor_field5']]
+                  'outdoor_field4','outdoor_field5','outdoor_field6']]
     y_sensasi = df.loc[:,['1']]
     
     y_sensasi=np.ravel(y_sensasi.values)
@@ -1688,7 +1690,7 @@ def training_sensasi_ann(parameter):
     X_sensasi = df.loc[:,['usia','kelamin','tinggi','berat','konstanta_termal','ac','durasi_ac',
                 'durasi_kipas','asal','lama_dijogja','indoor_field1','indoor_field2','indoor_field3',
                   'indoor_field4','indoor_field5','indoor_field6','outdoor_field1','outdoor_field2','outdoor_field3',
-                  'outdoor_field4','outdoor_field5']]
+                  'outdoor_field4','outdoor_field5','outdoor_field6']]
     y_sensasi = df.loc[:,['1']]
     
     y_sensasi=np.ravel(y_sensasi.values)
@@ -1812,7 +1814,7 @@ def simpan_model():
     global scaler_kenyamanan
     global scaler_penerimaan
     
-    nomor_ruang =df['kelas'][0]
+    nomor_ruang =df['ruang'][0]
     scaler = [scaler_sensasi,scaler_kenyamanan,scaler_penerimaan]
     model=[model_sensasi,model_kenyamanan,model_penerimaan,scaler]
     
