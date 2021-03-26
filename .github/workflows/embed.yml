@@ -18,6 +18,11 @@ jobs:
             ${{ github.workspace }}
             !${{ github.workspace }}/py32
             !${{ github.workspace }}/run32.cmd
+            !${{ github.workspace }}/.git
+            !${{ github.workspace }}/.github
+            !${{ github.workspace }}/.gitignore
+            !${{ github.workspace }}/requirements.txt
+            !${{ github.workspace }}/embed.cmd
 
       - uses: actions/upload-artifact@v2
         with:
@@ -26,3 +31,8 @@ jobs:
             ${{ github.workspace }}
             !${{ github.workspace }}/py64
             !${{ github.workspace }}/run64.cmd
+            !${{ github.workspace }}/.git
+            !${{ github.workspace }}/.github
+            !${{ github.workspace }}/.gitignore
+            !${{ github.workspace }}/requirements.txt
+            !${{ github.workspace }}/embed.cmd
