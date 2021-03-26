@@ -17,11 +17,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler  # doctest: +SKIP
 
-import sklearn.utils._cython_blas
-import sklearn.neighbors.typedefs
-import sklearn.neighbors.quad_tree
-import sklearn.tree
-import sklearn.tree._utils
 import os
 
 import sip
@@ -552,10 +547,10 @@ class Ui_MainWindow(object):
         ml_sensasi = self.jenis_model_sensasi.itemText(index)
         #print(ml_sensasi)
         if ml_sensasi == 'Random Forest':
-            print('masuk rf')
+            #print('masuk rf')
             self.parameter_rf_sensasi()
         elif ml_sensasi == 'Artificial Neural Network':
-            print('masuk ann')
+            #print('masuk ann')
             self.parameter_ann_sensasi()
     
     def update_parameter_kenyamanan(self,index):
@@ -1346,7 +1341,7 @@ class Ui_MainWindow(object):
         global model_sensasi
         global ml_sensasi
         
-        print(ml_sensasi)
+        #print(ml_sensasi)
         if ml_sensasi == 'Random Forest':
             jumlah_tree=self.parameter1_sensasi.value()
             impurity_sensasi=self.parameter2_sensasi.currentText()
@@ -1391,7 +1386,7 @@ class Ui_MainWindow(object):
         global model_kenyamanan
         global ml_kenyamanan
         
-        print(ml_kenyamanan)
+        #print(ml_kenyamanan)
         if ml_kenyamanan == 'Random Forest':
             jumlah_tree=self.parameter1_kenyamanan.value()
             impurity_kenyamanan=self.parameter2_kenyamanan.currentText()
@@ -1434,7 +1429,7 @@ class Ui_MainWindow(object):
         global model_penerimaan
         global ml_penerimaan
         
-        print(ml_penerimaan)
+        #print(ml_penerimaan)
         if ml_penerimaan == 'Random Forest':
             jumlah_tree=self.parameter1_penerimaan.value()
             impurity_penerimaan=self.parameter2_penerimaan.currentText()
