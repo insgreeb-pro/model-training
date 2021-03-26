@@ -1,7 +1,6 @@
 pandas
 python-dateutil
 numpy
-pickle
 scikit-learn
 sip
 pyqt5
