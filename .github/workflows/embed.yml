@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Generate Embed
-        run: embed.cmd
+        run: cmd embed.cmd
       - uses: actions/upload-artifact@v2
         with:
           name: model-training-win
