@@ -13,5 +13,16 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: model-training-win-with-embed
-          path: ${{ github.workspace }}
+          name: model-training-win64
+          path: |
+            ${{ github.workspace }}
+            !${{ github.workspace }}/py32
+            !${{ github.workspace }}/run32.cmd
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: model-training-win32
+          path: |
+            ${{ github.workspace }}
+            !${{ github.workspace }}/py64
+            !${{ github.workspace }}/run64.cmd
