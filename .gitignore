@@ -1,5 +1,6 @@
 py32
 py64
+run*.cmd
 python-*.zip
 
 

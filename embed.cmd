@@ -1,10 +1,10 @@
 @echo off
 
 set version=3.8.8
-curl -O https://bootstrap.pypa.io/get-pip.py
+@REM curl -O https://bootstrap.pypa.io/get-pip.py
 
 @REM PYTHON 32bit
-curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-win32.zip
+@REM curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-win32.zip
 
 mkdir py32
 tar -xf python-%version%-embed-win32.zip -C py32
@@ -18,7 +18,7 @@ python -m pip install -r requirements.txt
 cd ..
 
 @REM PYTHON 64bit
-curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-amd64.zip
+@REM curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-amd64.zip
 
 mkdir py64
 tar -xf python-%version%-embed-amd64.zip -C py64
@@ -38,5 +38,9 @@ del python-%version%-embed-amd64.zip
 del get-pip.py
 
 @REM Runner
-@echo start py32/python training_model_rf_ann.py>>run32.cmd
-@echo start py64/python training_model_rf_ann.py>>run64.cmd
+@echo @echo off>>run32.cmd
+@echo @echo off>>run64.cmd
+@echo py32\python training_model_rf_ann.py>>run32.cmd
+@echo py64\python training_model_rf_ann.py>>run64.cmd
+@echo pause>>run32.cmd
+@echo pause>>run64.cmd
