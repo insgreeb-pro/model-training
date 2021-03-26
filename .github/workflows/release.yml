@@ -7,7 +7,6 @@ on:
 
   release:
     types:
-      - created
       - published
 
 jobs:
@@ -23,6 +22,7 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
       - name: Gen zip files
+        shell: cmd
         run: |
           tar cf model-train-embed-win32-${{ steps.vars.outputs.tag }}.zip app.py assets py32 run32* *.md _*
           tar cf model-train-embed-win64-${{ steps.vars.outputs.tag }}.zip app.py assets py64 run64* *.md _*
