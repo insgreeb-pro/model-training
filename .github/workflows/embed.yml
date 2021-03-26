@@ -14,10 +14,6 @@ jobs:
             py32
             py64
           key: ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-
-            ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}-
-            ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}-${{ hashFiles('**/requirements.txt') }}
 
       - name: Generate Embed
         run: embed.cmd
