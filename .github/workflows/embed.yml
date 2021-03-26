@@ -7,6 +7,14 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            py32
+            py64
+          key: ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}
+
       - name: Generate Embed
         run: embed.cmd
         shell: cmd
@@ -25,3 +33,12 @@ jobs:
         with:
           name: model-training-win32
           path: model-train-embed-win32.zip
+
+      - name: Cleaning
+        run: |
+          cd py32
+          del *.py
+          cd ..
+          cd py64
+          del *.py
+          cd ..
