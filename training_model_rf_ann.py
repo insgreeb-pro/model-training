@@ -30,6 +30,8 @@ ml_sensasi='Random Forest'
 ml_kenyamanan='Random Forest'
 ml_penerimaan='Random Forest'
 
+df = pd.DataFrame()
+
 scaler_sensasi=None
 scaler_kenyamanan=None
 scaler_penerimaan=None
