@@ -11,28 +11,17 @@ jobs:
         run: embed.cmd
         shell: cmd
 
+      - name: Gen zip files
+        run: |
+          tar cfv model-train-embed-win32.zip *.py assets py32 run32* *.md _*
+          tar cfv model-train-embed-win64.zip *.py assets py64 run64* *.md _*
+
       - uses: actions/upload-artifact@v2
         with:
           name: model-training-win64
-          path: |
-            ${{ github.workspace }}
-            !${{ github.workspace }}/py32
-            !${{ github.workspace }}/run32.cmd
-            !${{ github.workspace }}/.git
-            !${{ github.workspace }}/.github
-            !${{ github.workspace }}/.gitignore
-            !${{ github.workspace }}/requirements.txt
-            !${{ github.workspace }}/embed.cmd
+          path: model-train-embed-win64.zip
 
       - uses: actions/upload-artifact@v2
         with:
           name: model-training-win32
-          path: |
-            ${{ github.workspace }}
-            !${{ github.workspace }}/py64
-            !${{ github.workspace }}/run64.cmd
-            !${{ github.workspace }}/.git
-            !${{ github.workspace }}/.github
-            !${{ github.workspace }}/.gitignore
-            !${{ github.workspace }}/requirements.txt
-            !${{ github.workspace }}/embed.cmd
+          path: model-train-embed-win32.zip
