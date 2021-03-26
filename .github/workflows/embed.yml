@@ -1,0 +1,15 @@
+name: Build Python with Embed
+
+on: [push]
+
+jobs:
+  build-win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Embed
+        run: embed.cmd
+      - uses: actions/upload-artifact@v2
+        with:
+          name: model-training-win
+          path: .
