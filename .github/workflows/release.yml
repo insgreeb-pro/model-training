@@ -14,23 +14,43 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            py32
+            py64
+          key: ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+
       - name: Generate Embed
-        run: embed.cmd
         shell: cmd
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: embed.cmd
 
       - name: Gen zip files
         shell: cmd
         run: |
-          tar cf model-train-embed-win32-${{ steps.vars.outputs.tag }}.zip app.py assets py32 run32* *.md _*
-          tar cf model-train-embed-win64-${{ steps.vars.outputs.tag }}.zip app.py assets py64 run64* *.md _*
+          tar cf model-train-embed-win32-${{steps.tag.outputs.tag}}.zip app.py assets py32 run32* *.md _*
+          tar cf model-train-embed-win64-${{steps.tag.outputs.tag}}.zip app.py assets py64 run64* *.md _*
           @echo python app.py>>run.cmd
-          tar cf model-train-${{ steps.vars.outputs.tag }}.zip *.py assets *.md _* run.cmd
+          tar cf model-train-${{steps.tag.outputs.tag}}.zip *.py assets *.md _* run.cmd
 
       - name: Upload to Release
         uses: AButler/upload-release-assets@v2.0
         with:
           files: "*.zip"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleaning
+        shell: cmd
+        run: |
+          cd py32
+          del *.py
+          cd ..
+          cd py64
+          del *.py
+          cd ..
