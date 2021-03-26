@@ -1,6 +1,6 @@
 @echo off
 
-set version=3.8.8
+set version=3.7.4
 set main=training_model_rf_ann.py
 
 curl -O https://bootstrap.pypa.io/get-pip.py
