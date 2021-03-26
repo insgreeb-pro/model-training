@@ -1,5 +1,7 @@
 pandas
 xlrd
+jdcal
+et_xmlfile
 openpyxl==2.6.0
 python-dateutil
 numpy
