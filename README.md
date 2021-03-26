@@ -10,5 +10,5 @@ python training_model_rf_ann.py
 ```
 Pre-processing data berdasarkan dua file
 
-*config.py
+* Item config.py
 *preprocess_training.py
