@@ -46,7 +46,6 @@ def filterPreProcess(data):
     # ini masih belom pake data kecamatan terbaru, soalnya inputnya belom format kecamatan jogja.
     asal = data["asal"]
     data["asal"] = [0 if c in data_asal["sejuk"] else 1 for c in asal]
-    print("Done!")
     return data
 
 data_asal = json.loads("".join(open('assets/daerah.json').readlines()))

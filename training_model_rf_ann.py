@@ -1333,8 +1333,7 @@ class Ui_MainWindow(object):
         #Preprocessing dulu biar df nanti dipake udah jadi angka semua
         df=preprocess_training.filterNone(df)
         df=preprocess_training.filterPreProcess(df)
-        print(df)
-        print(list(df))
+
 
         
     
