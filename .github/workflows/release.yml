@@ -1,0 +1,36 @@
+name: Upload Release Files
+
+on:
+  push:
+    tags:
+      - v.+
+
+  release:
+    types:
+      - created
+      - published
+
+jobs:
+  build-win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Embed
+        run: embed.cmd
+        shell: cmd
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Gen zip files
+        run: |
+          tar cfv model-train-embed-win32-${{ steps.vars.outputs.tag }}.zip *.py assets py32 run32* *.md _*
+          tar cfv model-train-embed-win64-${{ steps.vars.outputs.tag }}.zip *.py assets py64 run64* *.md _*
+          @echo python training_model_rf_ann.py>>run.cmd
+          tar cfv model-train-${{ steps.vars.outputs.tag }}.zip *.py assets *.md _* run*
+
+      - name: Upload to Release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: "*.zip"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
