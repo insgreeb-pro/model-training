@@ -36,7 +36,6 @@ jobs:
         run: |
           tar cf model-train-embed-win32-${{steps.tag.outputs.tag}}.zip app.py assets py32 run32* *.md _*
           tar cf model-train-embed-win64-${{steps.tag.outputs.tag}}.zip app.py assets py64 run64* *.md _*
-          @echo python app.py>>run.cmd
           tar cf model-train-${{steps.tag.outputs.tag}}.zip *.py assets *.md _* run.cmd
 
       - name: Upload to Release
