@@ -1,10 +1,10 @@
 @echo off
 
 set version=3.8.8
-@REM curl -O https://bootstrap.pypa.io/get-pip.py
+curl -O https://bootstrap.pypa.io/get-pip.py
 
 @REM PYTHON 32bit
-@REM curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-win32.zip
+curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-win32.zip
 
 mkdir py32
 tar -xf python-%version%-embed-win32.zip -C py32
@@ -18,7 +18,7 @@ python -m pip install -r requirements.txt
 cd ..
 
 @REM PYTHON 64bit
-@REM curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-amd64.zip
+curl -O https://www.python.org/ftp/python/%version%/python-%version%-embed-amd64.zip
 
 mkdir py64
 tar -xf python-%version%-embed-amd64.zip -C py64
