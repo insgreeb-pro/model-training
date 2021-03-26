@@ -13,7 +13,7 @@ jobs:
           path: |
             py32
             py64
-          key: ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/embed.cmd') }}-${{ hashFiles('**/requirements.txt') }}
 
       - name: Generate Embed
         run: embed.cmd

@@ -1,10 +1,6 @@
-pandas
-xlrd
-jdcal
-et_xmlfile
-openpyxl==2.6.0
+openpyxl==3.0.3
+pandas==0.24.2
 python-dateutil
-numpy
+numpy==1.18.5
 scikit-learn==0.23.2
-sip
-pyqt5
+pyqt5==5.15.4
