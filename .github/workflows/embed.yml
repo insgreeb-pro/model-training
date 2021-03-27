@@ -22,8 +22,8 @@ jobs:
 
       - name: Gen zip files
         run: |
-          tar cf model-train-embed-win32.zip app.py assets py32 run32* *.md _*
-          tar cf model-train-embed-win64.zip app.py assets py64 run64* *.md _*
+          tar cf model-train-embed-win32.zip app.py assets py32 run32* *.md
+          tar cf model-train-embed-win64.zip app.py assets py64 run64* *.md
 
       - uses: actions/upload-artifact@v2
         with:
@@ -73,6 +73,7 @@ jobs:
           python -m pip install pyinstaller
       - name: Build
         run: pyinstaller training_model_rf_ann.py
+
       - uses: actions/upload-artifact@v2
         with:
           name: model-training-${{runner.os}}

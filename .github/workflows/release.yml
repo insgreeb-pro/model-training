@@ -31,9 +31,9 @@ jobs:
       - name: Gen zip files
         shell: cmd
         run: |
-          tar cf model-train-embed-win32-${{steps.tag.outputs.tag}}.zip app.py assets py32 run32* *.md _*
-          tar cf model-train-embed-win64-${{steps.tag.outputs.tag}}.zip app.py assets py64 run64* *.md _*
-          tar cf model-train-${{steps.tag.outputs.tag}}.zip *.py assets *.md _* run.cmd
+          tar cf model-train-embed-win32-${{steps.tag.outputs.tag}}.zip app.py assets py32 run32* *.md
+          tar cf model-train-embed-win64-${{steps.tag.outputs.tag}}.zip app.py assets py64 run64* *.md
+          tar cf model-train-${{steps.tag.outputs.tag}}.zip *.py assets *.md run.cmd
 
       - name: Upload to Release
         uses: AButler/upload-release-assets@v2.0
@@ -90,7 +90,7 @@ jobs:
         uses: dawidd6/action-get-tag@v1
 
       - name: Gen Zip
-        run: tar cf model-training-${{runner.os}}-${{steps.tag.outputs.tag}}.zip dist/*
+        run: tar cf model-training-${{runner.os}}-${{steps.tag.outputs.tag}}.zip dist
 
       - name: Upload to Release
         uses: AButler/upload-release-assets@v2.0
