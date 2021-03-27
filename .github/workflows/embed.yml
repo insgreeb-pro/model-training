@@ -45,17 +45,16 @@ jobs:
           cd ..
   build-others:
     name: Build Mac and Linux
-    runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-11.0, ubuntu-18.04]
+        os: [macos-latest, ubuntu-latest]
         include:
-          - os: ubuntu-18.04
-            name: linux
+          - os: ubuntu-latest
             path: ~/.cache/pip
-          - os: macos-11.0
-            name: mac
+          - os: macos-latest
             path: ~/Library/Caches/pip
+    runs-on: ${{matrix.os}}
 
     steps:
       - uses: actions/checkout@v2
@@ -76,5 +75,5 @@ jobs:
         run: pyinstaller training_model_rf_ann.py
       - uses: actions/upload-artifact@v2
         with:
-          name: model-training-${{matrix.name}}
+          name: model-training-${{runner.os}}
           path: dist

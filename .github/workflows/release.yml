@@ -53,17 +53,16 @@ jobs:
 
   build-others:
     name: Build Mac and Linux
-    runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-11.0, ubuntu-18.04]
+        os: [macos-latest, ubuntu-latest]
         include:
-          - os: ubuntu-18.04
-            name: linux
+          - os: ubuntu-latest
             path: ~/.cache/pip
-          - os: macos-11.0
-            name: mac
+          - os: macos-latest
             path: ~/Library/Caches/pip
+    runs-on: ${{matrix.os}}
 
     steps:
       - uses: actions/checkout@v2
@@ -91,7 +90,7 @@ jobs:
         uses: dawidd6/action-get-tag@v1
 
       - name: Gen Zip
-        run: tar cf model-training-${{matrix.name}}-${{steps.tag.outputs.tag}}.zip dist/*
+        run: tar cf model-training-${{runner.os}}-${{steps.tag.outputs.tag}}.zip dist/*
 
       - name: Upload to Release
         uses: AButler/upload-release-assets@v2.0
