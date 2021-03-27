@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build-win:
+    name: Build Windows
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
@@ -21,8 +22,8 @@ jobs:
 
       - name: Gen zip files
         run: |
-          tar cf model-train-embed-win32.zip app.py assets py32 run32* *.md _*
-          tar cf model-train-embed-win64.zip app.py assets py64 run64* *.md _*
+          tar cf model-train-embed-win32.zip app.py assets py32 run32* *.md
+          tar cf model-train-embed-win64.zip app.py assets py64 run64* *.md
 
       - uses: actions/upload-artifact@v2
         with:
@@ -42,3 +43,38 @@ jobs:
           cd py64
           del *.py
           cd ..
+  build-others:
+    name: Build Mac and Linux
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            path: ~/.cache/pip
+          - os: macos-latest
+            path: ~/Library/Caches/pip
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+      - uses: actions/cache@v2
+        with:
+          path: ${{matrix.path}}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install Dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install pyinstaller
+      - name: Build
+        run: pyinstaller training_model_rf_ann.py
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: model-training-${{runner.os}}
+          path: dist

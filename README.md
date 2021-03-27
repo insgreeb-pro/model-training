@@ -1,14 +1,10 @@
 # model-training
-Program untuk training model SMK
 
-## Aplikasi
+Program untuk training model **Machine Learning (Artificial Neural Network dan Random Forest)** dengan parameter model yang dapat diubah sesuai kebutuhan.
 
-Program akan selalu dijalankan dengan perintah
+## Cara Menggunakan
 
-```shell
-python training_model_rf_ann.py
-```
-Pre-processing data berdasarkan dua file
-
-* Item config.py
-* Item preprocess_training.py
+1. Unduh file `.zip` di [sini](https://github.com/insgreeb-pro/model-training/releases/latest) sesuai dengan sistem operasi yang anda gunakan (`32bit` atau `64bit`) atau `model-train` jika di komputer anda sudah terinstall python.
+2. ekstrak file `.zip` yang sudah anda unduh.
+3. Jalankan `run.cmd`, `run32.cmd` atau `run64.cmd` (sesuai yang berada di dalam file `.zip`)
+4. Output model akan disimpan pada `_OUTPUT MODEL`.

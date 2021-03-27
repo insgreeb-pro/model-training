@@ -40,10 +40,23 @@ del python-%version%-embed-amd64.zip
 del get-pip.py
 
 @REM Runner
+copy %main% app.py
 @echo @echo off>>run32.cmd
 @echo @echo off>>run64.cmd
-copy %main% app.py
+@echo @echo off>>run.cmd
+
+@echo color 0a>>run32.cmd
+@echo color 0a>>run64.cmd
+@echo color 0a>>run.cmd
+
+@echo type assets\figlet.txt>>run32.cmd
+@echo type assets\figlet.txt>>run64.cmd
+@echo type assets\figlet.txt>>run.cmd
+
 @echo py32\python app.py>>run32.cmd
 @echo py64\python app.py>>run64.cmd
+@echo python app.py>>run.cmd
+
 @echo pause>>run32.cmd
 @echo pause>>run64.cmd
+@echo pause>>run.cmd
